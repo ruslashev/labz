@@ -6,22 +6,24 @@
 #define R 0
 #define W 1
 
-void error(char const *message) {
+void error(char const *message)
+{
 	puts(message);
 	exit(1);
 }
 
-int main(int argc, char const *argv[]) {
-	unsigned int indent_size = 4;
+int main(int argc, char const *argv[])
+{
 	int p[2], q[2];
 	if (pipe(p) == -1)
 		error("Error creating channel p");
 	if (pipe(q) == -1)
 		error("Error creating channel q");
 	pid_t pid = fork();
-	if (pid == -1) {
+	if (pid == -1)
 		error("Error at fork()");
-	} else if (!pid) {
+	else if (!pid)
+	{
 		close(p[W]);
 		close(q[R]);
 		if (dup2(p[R], fileno(stdin)) == -1)
@@ -32,14 +34,15 @@ int main(int argc, char const *argv[]) {
 		close(q[W]);
 		if (execl("filter", "filter", "", NULL) == -1)
 			error("Error calling filter");
-	} else {
+	} else
+	{
 		FILE *fp = fdopen(p[W], "w");
 		if (!fp)
 			error("Error: can't open output file");
 		close(p[R]);
 		close(q[W]);
 		int c;
-		while((c = getchar()) != EOF)
+		while ((c = getchar()) != EOF)
 			putc(c, fp);
 		fclose(fp);
 		int pid_status;
