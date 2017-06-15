@@ -4,8 +4,7 @@
 #include <string.h>
 #include <sys/wait.h>
 
-const int R = 0;
-const int W = 1;
+const int R = 0, W = 1;
 
 void die(char const *msg) {
   perror(msg);
