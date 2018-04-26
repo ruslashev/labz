@@ -15,8 +15,7 @@ int main() {
         calc(x1, fin, way + "+3 ", pred_sat | (x1 == 20) | (x1 == 27));
         calc(x2, fin, way + "+4 ", pred_sat | (x2 == 20) | (x2 == 27));
         calc(x3, fin, way + "*2 ", pred_sat | (x3 == 20) | (x3 == 27));
-      } else
-        if (x == fin && pred_sat) {
+      } else if (x == fin && pred_sat) {
           count++;
           cout << way << endl;
         }
