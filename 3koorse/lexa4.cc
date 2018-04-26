@@ -27,20 +27,12 @@ bool contains_all_but_b(const set<int> &A, set<int> U, const set<int> &B) {
 int main() {
   srand(time(nullptr));
 
-  set<int> U, A, B;
-
-  /*
+  set<int> U = { 1, 2 }, A, B;
   int N = 10;
-  cout << "Enter " << N << " numbers: ";
-  while (N) {
-    int t;
-    cin >> t;
-    U.insert(t);
-    --N;
+  for (int i = 0; i < N - 2; ++i) {
+    auto p = U.end();
+    U.insert(*(--p) + *(--p));
   }
-  */
-  for (int i = 1; i <= 10; ++i)
-    U.insert(i);
 
   for (int x : U)
     if (x % 2 == 0)
@@ -54,20 +46,16 @@ int main() {
     A.insert(elem);
   }
 
-  set<int> ab;
-  set_intersection(A.begin(), A.end(), B.begin(), B.end(), inserter(ab, ab.begin()));
-
-  set<int> nA, nB, nAunB, nnAunB;
-  set_difference(U.begin(), U.end(), A.begin(), A.end(), inserter(nA, nA.begin()));
+  set<int> AmB, nB, AnB;
+  set_difference(A.begin(), A.end(), B.begin(), B.end(), inserter(AmB, AmB.begin()));
   set_difference(U.begin(), U.end(), B.begin(), B.end(), inserter(nB, nB.begin()));
-  set_union(nA.begin(), nA.end(), nB.begin(), nB.end(), inserter(nAunB, nAunB.begin()));
-  set_difference(U.begin(), U.end(), nAunB.begin(), nAunB.end(), inserter(nnAunB, nnAunB.begin()));
+  set_intersection(A.begin(), A.end(), nB.begin(), nB.end(), inserter(AnB, AnB.begin()));
 
   print_set("U", U);
   print_set("A", A);
   print_set("B", B);
-  print_set("ab", ab);
-  print_set("nnAunB", nnAunB);
+  print_set("AmB", AmB);
+  print_set("AnB", AnB);
 
   int n = 0, m = 9;
   for (int i = n; i <= m; ++i)
