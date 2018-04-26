@@ -18,6 +18,12 @@ void print_set(const string &name, const set<int> &s) {
 
 }
 
+bool contains_all_but_b(const set<int> &A, set<int> U, const set<int> &B) {
+  for (int x : B)
+    U.erase(x);
+  return U == A;
+}
+
 int main() {
   srand(time(nullptr));
 
@@ -32,8 +38,8 @@ int main() {
     if (U.count(x))
       B.insert(x);
 
-  while (A.size() < U.size() / 2) {
-    size_t idx = rand_in_range(0, U.size());
+  while (!contains_all_but_b(A, U, B)) {
+    size_t idx = rand_in_range(0, U.size() - 1);
     int elem = *next(U.cbegin(), idx);
     if (c <= elem && elem <= d)
       continue;

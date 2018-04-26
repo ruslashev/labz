@@ -1,4 +1,4 @@
 all:
-	g++ misha.cc
+	g++ andrey4.cc
 	./a.out
 
