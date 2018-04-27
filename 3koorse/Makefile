@@ -1,4 +1,4 @@
 all:
-	g++ yar4.cc
+	g++ lexa1.cc
 	./a.out
 
